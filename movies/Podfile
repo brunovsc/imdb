@@ -1,0 +1,23 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '9.0'
+
+target ‘movies’ do
+  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for movies
+  pod 'AFNetworking', '2.6.3'
+  pod 'Mantle', '2.0.6'
+  pod 'MBProgressHUD', '0.9.2'
+
+  target ‘moviesTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target ‘moviesUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
