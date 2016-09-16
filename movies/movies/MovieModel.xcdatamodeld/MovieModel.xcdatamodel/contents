@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+    <entity name="Movie" syncable="YES">
+        <attribute name="actors" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="awards" optional="YES" syncable="YES"/>
+        <attribute name="country" optional="YES" syncable="YES"/>
+        <attribute name="director" optional="YES" syncable="YES"/>
+        <attribute name="genre" optional="YES" syncable="YES"/>
+        <attribute name="imdbID" optional="YES" syncable="YES"/>
+        <attribute name="imdbRating" optional="YES" syncable="YES"/>
+        <attribute name="imdbVotes" optional="YES" syncable="YES"/>
+        <attribute name="key" optional="YES" syncable="YES"/>
+        <attribute name="language" optional="YES" syncable="YES"/>
+        <attribute name="metascore" optional="YES" syncable="YES"/>
+        <attribute name="plot" optional="YES" syncable="YES"/>
+        <attribute name="poster" optional="YES" syncable="YES"/>
+        <attribute name="released" optional="YES" syncable="YES"/>
+        <attribute name="response" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="runtime" optional="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" syncable="YES"/>
+        <attribute name="writer" optional="YES" syncable="YES"/>
+        <attribute name="year" optional="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Movie" positionX="-63" positionY="-18" width="128" height="345"/>
+    </elements>
+</model>

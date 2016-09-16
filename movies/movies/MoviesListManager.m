@@ -16,6 +16,7 @@
     
     _moviesList = [[NSMutableArray alloc] init];
     _searchHelper = [[NSMutableDictionary alloc] init];
+    _movieImages = [[NSMutableDictionary alloc] init];
     
     return self;
 }
@@ -39,26 +40,30 @@
     return _searchHelper;
 }
 
-- (Movie *)movieInLibrary:(NSString *)movieTitle{
-    Movie *m;
+- (MovieRealm *)movieInLibrary:(NSString *)movieTitle{
+    MovieRealm *m;
     m = [_searchHelper objectForKey:[[movieTitle lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""]];
     return m;
 }
 
-- (void)addMovie:(Movie*)movie{
-    Movie *m;
-    NSString *keyString = [[movie.title lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    m = [_searchHelper objectForKey:keyString];
+- (void)addMovie:(MovieRealm*)movie{
+    MovieRealm *m;
+    //NSString *keyString = [[movie.title lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    m = [_searchHelper objectForKey:movie.key];
     if(m == nil){
         m.isOnLibrary = YES;
         [_moviesList addObject:movie];
-        [_searchHelper setObject:movie forKey:keyString];
+        [_searchHelper setObject:movie forKey:movie.key];
     }
 
 }
 
+- (void)addImage:(UIImage*)image forKey:(NSString*)key{
+    [_movieImages setObject:image forKey:key];
+}
+
 - (void)removeMovie:(NSString *)movieTitle{
-    Movie *m;
+    MovieRealm *m;
     NSString *keyString = [[movieTitle lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
     m = [_searchHelper objectForKey:keyString];
     if(m){
@@ -67,21 +72,27 @@
     }
 }
 
+- (UIImage*)imageForKey:(NSString*)key{
+    return [_movieImages objectForKey:key];
+}
+
 - (void)saveData{
+    RLMRealm *realm = [RLMRealm defaultRealm];
     
-    MovieDatabase *MD = [MovieDatabase sharedInstance];
+    [realm beginWriteTransaction];
     
     for(NSString* key in _searchHelper){
-        Movie *m = [_searchHelper objectForKey:key];
+        MovieRealm *m = [_searchHelper objectForKey:key];
         if(!m.onDatabase){
-            BOOL dataSaved = NO;
+            //BOOL dataSaved = NO;
             
-            /*
-             dispatch_async(dispatch_get_main_queue(), ^{
-             [MD saveData:key movie:m];
-            });*/
+ 
+            //dispatch_async(dispatch_get_main_queue(), ^{
+            //[MD saveData:key movie:m];
+            //});
             
-            dataSaved = [MD saveMovie:key movie:m];
+            [realm addObject:m];
+            NSLog(@"%@ added to write list", key);/*
             if(dataSaved){
                 m.onDatabase = YES;
                 NSLog(@"%@ saved to database", key);
@@ -90,25 +101,41 @@
             else{
                 m.onDatabase = NO;
                 NSLog(@"Failed to save %@ to database", key);
-            }
+            }*/
         }
         else {
             NSLog(@"%@ already in the database", key);
         }
     }
+    
+    [realm commitWriteTransaction];
+    NSLog(@"movie list commited");
 }
+
 
 - (void)loadData{
     
-    MovieDatabase *MD = [MovieDatabase sharedInstance];
-    NSArray *resultsSearch = [MD findAll];
+    //MovieDatabase *MD = [MovieDatabase sharedInstance];
+    //NSArray *resultsSearch = [MD findAll];
+    RLMResults<MovieRealm *> *moviesLoaded = [MovieRealm allObjects];
     
-    for(NSArray *rMovie in resultsSearch){
-        Movie *m = [[Movie alloc] initWithInfoArray:rMovie];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    for(MovieRealm *rMovie in moviesLoaded){
+        
+        MovieRealm *m = [rMovie copy];
+        //[m copy];
         m.isOnLibrary = YES;
         m.onDatabase = YES;
         [self addMovie:m];
-        NSLog(@"%@ loaded from database", m.title);
+        
+        
+        NSString * keyPNG = [NSString stringWithFormat:@"%@.png",m.key];
+        UIImage *poster = [UIImage imageWithContentsOfFile:[basePath stringByAppendingPathComponent:keyPNG]];
+        [self addImage:poster forKey:m.key];
+        
+        NSLog(@"%@ found in database", rMovie.title);
     }
     
     NSLog(@"Finished loading database");

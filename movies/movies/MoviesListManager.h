@@ -7,21 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Movie.h"
+#import "MovieRealm.h"
 #import "MovieDatabase.h"
+#import <Realm/Realm.h>
+#import <UIKit/UIKit.h>
 
 @interface MoviesListManager : NSObject
 
 @property (strong) NSMutableArray *moviesList;
 @property (strong) NSMutableDictionary *searchHelper;
+@property (strong) NSMutableDictionary *movieImages;
 
 + (id)sharedInstance;
 - (NSMutableArray *)getMoviesList;
 - (NSMutableDictionary *)getDictionary;
-- (void)addMovie:(Movie *)movie;
+- (void)addMovie:(MovieRealm *)movie;
 - (void)removeMovie:(NSString *)movieTitle;
-- (Movie *)movieInLibrary:(NSString *)movieTitle;
+- (MovieRealm *)movieInLibrary:(NSString *)movieTitle;
 
+- (void)addImage:(UIImage*)image forKey:(NSString*)key;
+- (UIImage*)imageForKey:(NSString*)key;
 
 - (void)saveData;
 - (void)loadData;

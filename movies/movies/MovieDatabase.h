@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
-#import "Movie.h"
 #import "MoviesListManager.h"
 #import <UIKit/UIImage.h>
 
@@ -21,9 +20,9 @@
 + (id)sharedInstance;
 - (BOOL)createDB;
 - (NSArray *)findAll;
-
+/*
 - (BOOL)saveMovie:(NSString*)key movie:(Movie*)m;
 - (UIImage*)downloadImage:(NSString*)key url:(NSString*)urlString;
 - (BOOL)saveImage:(UIImage*)image forKey:(NSString *)key;
-
+*/
 @end

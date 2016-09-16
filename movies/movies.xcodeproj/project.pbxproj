@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		177143FC6FC6CF006C0642DE /* libPods-moviesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4155E61B99D298DC3CAB0768 /* libPods-moviesTests.a */; };
+		AB2FBD3B1D8AE2BD009EEDF0 /* MovieRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FBD3A1D8AE2BD009EEDF0 /* MovieRealm.m */; };
+		AB2FBD471D8AE53E009EEDF0 /* MovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FBD461D8AE53E009EEDF0 /* MovieModel.m */; };
 		AB31E5C11D88434800689BD0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB31E5C01D88434800689BD0 /* libsqlite3.tbd */; };
-		AB31E5C41D88437F00689BD0 /* MovieDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = AB31E5C31D88437F00689BD0 /* MovieDatabase.m */; };
 		AB82A8D81D860B3F00A5180D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8D71D860B3F00A5180D /* main.m */; };
 		AB82A8DB1D860B3F00A5180D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8DA1D860B3F00A5180D /* AppDelegate.m */; };
 		AB82A8DE1D860B3F00A5180D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8DD1D860B3F00A5180D /* ViewController.m */; };
@@ -19,7 +20,6 @@
 		AB82A8F11D860B3F00A5180D /* moviesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8F01D860B3F00A5180D /* moviesTests.m */; };
 		AB82A8FC1D860B3F00A5180D /* moviesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8FB1D860B3F00A5180D /* moviesUITests.m */; };
 		AB82A90B1D860C3800A5180D /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A90A1D860C3800A5180D /* Library.m */; };
-		AB82A9131D860C8000A5180D /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9121D860C8000A5180D /* Movie.m */; };
 		AB82A9161D860C8B00A5180D /* HTTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9151D860C8B00A5180D /* HTTPService.m */; };
 		AB82A9191D860C9700A5180D /* MoviesListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9181D860C9700A5180D /* MoviesListManager.m */; };
 		AB82A9211D8629B600A5180D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9201D8629B600A5180D /* DetailsViewController.m */; };
@@ -54,9 +54,11 @@
 		4155E61B99D298DC3CAB0768 /* libPods-moviesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		773FA1D6E006F8845C042EA1 /* Pods-movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-movies/Pods-movies.debug.xcconfig"; sourceTree = "<group>"; };
 		7D06EE2A899BE5A14E7569D3 /* libPods-moviesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB2FBD391D8AE2BD009EEDF0 /* MovieRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieRealm.h; sourceTree = "<group>"; };
+		AB2FBD3A1D8AE2BD009EEDF0 /* MovieRealm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieRealm.m; sourceTree = "<group>"; };
+		AB2FBD451D8AE53E009EEDF0 /* MovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieModel.h; sourceTree = "<group>"; };
+		AB2FBD461D8AE53E009EEDF0 /* MovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieModel.m; sourceTree = "<group>"; };
 		AB31E5C01D88434800689BD0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		AB31E5C21D88437F00689BD0 /* MovieDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDatabase.h; sourceTree = "<group>"; };
-		AB31E5C31D88437F00689BD0 /* MovieDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDatabase.m; sourceTree = "<group>"; };
 		AB82A8D31D860B3F00A5180D /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB82A8D71D860B3F00A5180D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB82A8D91D860B3F00A5180D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,8 +77,6 @@
 		AB82A8FD1D860B3F00A5180D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB82A9091D860C3800A5180D /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
 		AB82A90A1D860C3800A5180D /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
-		AB82A9111D860C8000A5180D /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
-		AB82A9121D860C8000A5180D /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		AB82A9141D860C8B00A5180D /* HTTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPService.h; sourceTree = "<group>"; };
 		AB82A9151D860C8B00A5180D /* HTTPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPService.m; sourceTree = "<group>"; };
 		AB82A9171D860C9700A5180D /* MoviesListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesListManager.h; sourceTree = "<group>"; };
@@ -169,13 +169,12 @@
 		AB82A8D51D860B3F00A5180D /* movies */ = {
 			isa = PBXGroup;
 			children = (
-				ABF97BA51D899E62007478FF /* Layout */,
-				ABF00AA11D86E9EF0013B764 /* Persistence */,
 				AB82A9221D8648F500A5180D /* Common */,
-				AB82A9101D860C5C00A5180D /* Service */,
 				AB82A90F1D860C5600A5180D /* Model */,
-				AB82A90E1D860C5000A5180D /* Storyboard */,
+				AB82A9101D860C5C00A5180D /* Service */,
 				AB82A90C1D860C3F00A5180D /* Controller */,
+				AB82A90E1D860C5000A5180D /* Storyboard */,
+				ABF97BA51D899E62007478FF /* Layout */,
 				AB82A8D61D860B3F00A5180D /* Supporting Files */,
 			);
 			path = movies;
@@ -234,8 +233,10 @@
 		AB82A90F1D860C5600A5180D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB82A9111D860C8000A5180D /* Movie.h */,
-				AB82A9121D860C8000A5180D /* Movie.m */,
+				AB2FBD451D8AE53E009EEDF0 /* MovieModel.h */,
+				AB2FBD461D8AE53E009EEDF0 /* MovieModel.m */,
+				AB2FBD391D8AE2BD009EEDF0 /* MovieRealm.h */,
+				AB2FBD3A1D8AE2BD009EEDF0 /* MovieRealm.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -260,15 +261,6 @@
 				AB82A9241D86492100A5180D /* MBProgressHUDHelper.m */,
 			);
 			name = Common;
-			sourceTree = "<group>";
-		};
-		ABF00AA11D86E9EF0013B764 /* Persistence */ = {
-			isa = PBXGroup;
-			children = (
-				AB31E5C21D88437F00689BD0 /* MovieDatabase.h */,
-				AB31E5C31D88437F00689BD0 /* MovieDatabase.m */,
-			);
-			name = Persistence;
 			sourceTree = "<group>";
 		};
 		ABF97BA51D899E62007478FF /* Layout */ = {
@@ -543,15 +535,15 @@
 			files = (
 				AB82A8DE1D860B3F00A5180D /* ViewController.m in Sources */,
 				AB82A90B1D860C3800A5180D /* Library.m in Sources */,
-				AB82A9131D860C8000A5180D /* Movie.m in Sources */,
 				AB82A9191D860C9700A5180D /* MoviesListManager.m in Sources */,
+				AB2FBD3B1D8AE2BD009EEDF0 /* MovieRealm.m in Sources */,
 				AB82A9161D860C8B00A5180D /* HTTPService.m in Sources */,
+				AB2FBD471D8AE53E009EEDF0 /* MovieModel.m in Sources */,
 				AB82A8DB1D860B3F00A5180D /* AppDelegate.m in Sources */,
 				AB82A9251D86492100A5180D /* MBProgressHUDHelper.m in Sources */,
 				AB82A8D81D860B3F00A5180D /* main.m in Sources */,
 				AB82A9211D8629B600A5180D /* DetailsViewController.m in Sources */,
 				ABF97BAC1D899F46007478FF /* MovieListTableViewCell.m in Sources */,
-				AB31E5C41D88437F00689BD0 /* MovieDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

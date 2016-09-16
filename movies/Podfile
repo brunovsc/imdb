@@ -9,10 +9,12 @@ target ‘movies’ do
   pod 'AFNetworking', '2.6.3'
   pod 'Mantle', '2.0.6'
   pod 'MBProgressHUD', '0.9.2'
+  pod 'Realm'
 
   target ‘moviesTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Realm/Headers'
   end
 
   target ‘moviesUITests' do

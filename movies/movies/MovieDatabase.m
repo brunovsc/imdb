@@ -72,7 +72,7 @@
     }
     return isSuccess;
 }
-
+/*
 - (BOOL)saveMovie:(NSString*)key movie:(Movie*)m{
     if([self saveInfo:key movie:m]){
         NSLog(@"Save info OK");
@@ -83,6 +83,7 @@
     }
     return YES;
 }
+ 
 - (UIImage*)downloadImage:(NSString*)key url:(NSString*)urlString{
     NSString *urlStringHttps = [urlString stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
     NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
@@ -130,22 +131,22 @@
         const char *insert_stmt = [insertSQL UTF8String];
         
         sqlite3_prepare_v2(database, insert_stmt,-1, &stmt, NULL);
-        //NSLog(@"%d", sqlite3_step(stmt));
-        //NSLog(@"%d", sqlite3_prepare_v2(database, insert_stmt,-1, &stmt, NULL));
+        NSLog(@"%d", sqlite3_step(stmt));
+        NSLog(@"%d", sqlite3_prepare_v2(database, insert_stmt,-1, &stmt, NULL));
         
         if (sqlite3_step(stmt) == SQLITE_DONE){
             sqlite3_finalize(stmt);
             return YES;
         }
         else{
-            //NSLog(@"%d", sqlite3_step(stmt));
+            NSLog(@"%d", sqlite3_step(stmt));
             return NO;
         }
         
     }
     return NO;
 }
-
+*/
 - (NSArray*)findByKey:(NSString*)key{
     
     const char *dbpath = [databasePath UTF8String];
@@ -252,6 +253,8 @@
             
                 NSString *key = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
                 [rowResult addObject:key];
+                
+                NSLog(@"%@", key);
                 
                 NSString *title = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
                 [rowResult addObject:title];

@@ -19,12 +19,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [_movieTitleLabel setText:movie.title];
-    [_movieYearLabel setText:movie.year];
-    [_movieReleasedLabel setText:movie.released];
-    [_movieRuntimeLabel setText:movie.runtime];
-    [_movieGenreLabel setText:movie.genre];
-    if(movie.isOnLibrary == NO){
+    [_movieTitleInfoLabel setText:movie.title];
+    [_movieYearInfoLabel setText:movie.year];
+    [_movieRuntimeInfoLabel setText:movie.runtime];
+    [_movieGenreInfoLabel setText:movie.genre];
+    [_movieRatingInfoLabel setText:movie.imdbRating];
+    
+    [_moviePlotInfoLabel setText:movie.plot];
+    [_movieWriterInfoLabel setText:movie.writer];
+    [_movieDirectorInfoLabel setText:movie.director];
+    [_movieActorsInfoLabel setText:movie.actors];
+    [_movieAwardsInfoLabel setText:movie.awards];
+    
+    [_moviePosterImageView setImage:_poster];
+    [_moviePosterImageView setNeedsDisplay];
+    [_moviePosterImageView setNeedsLayout];
+    
+    if(movie.isOnLibrary == YES){
         [_addToLibraryButton setTitle:@"Remove from Library" forState:UIControlStateNormal];
     }
     else{
@@ -39,10 +50,28 @@
 }
 
 - (IBAction)addToLibrary:(id)sender {
+    
     if(movie.isOnLibrary == NO){
+        
+        NSString * keyString = [[movie.title lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
         movie.isOnLibrary = YES;
+        movie.key = keyString;
+        
         [_addToLibraryButton setTitle:@"Remove from Library" forState:UIControlStateNormal];
         [[MoviesListManager sharedInstance] addMovie:movie];
+        [[MoviesListManager sharedInstance] addImage:_poster forKey:keyString];
+        
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        
+        
+        NSString * keyPNG = [NSString stringWithFormat:@"%@.png",keyString];
+        //UIImage * imageToSave = [UIImage imageNamed:keyPNG];
+        NSData * binaryImageData = UIImagePNGRepresentation(_poster);
+        
+        [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:keyPNG] atomically:YES];
+        
         NSString *addMessage = [NSString stringWithFormat:@"%@ added to your library. It will be available offline", movie.title];
         UIAlertView *messageAlert = [[UIAlertView alloc]
                                      initWithTitle:@"Done"

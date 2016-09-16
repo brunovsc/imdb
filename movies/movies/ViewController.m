@@ -12,7 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *movieNameTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) Movie *movieFromSearchResult;
+@property (strong, nonatomic) MovieRealm *movieFromSearchResult;
+@property (strong, nonatomic) UIImage *imageFromSearchResult;
+
+@property (weak, nonatomic) IBOutlet UILabel *imdbLabel;
 
 @property (strong, atomic) NSMutableArray *movies;
 
@@ -24,6 +27,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     _movies = [[MoviesListManager sharedInstance] getMoviesList];
+    
+    UIFont *font = _imdbLabel.font;
+    _imdbLabel.font = [font fontWithSize:24];
+    
     [_tableView reloadData];
     
 }
@@ -33,6 +40,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIImage*)downloadAndSaveImage:(NSString*)url{
+    
+    
+    
+    return nil;
+}
+
 
 -(IBAction)searchPressed:(id)sender{
     [_movieNameTextField resignFirstResponder];
@@ -40,16 +54,29 @@
     if(![self.movieNameTextField.text isEqualToString:@""]){
         [MBProgressHUDHelper showMBProgressInView:self.view withAnimationType:MBProgressHUDModeIndeterminate withTitle:@"Searching movie info..."];
     
-        Movie *m = [[MoviesListManager sharedInstance] movieInLibrary:self.movieNameTextField.text];
+        MovieRealm *m = [[MoviesListManager sharedInstance] movieInLibrary:self.movieNameTextField.text];
         if(m == nil){
         
-            [[Library sharedHTTPService] getMovieWithName:self.movieNameTextField.text ?: @"" success:^(Movie *response) {
+            [[Library sharedHTTPService] getMovieWithName:self.movieNameTextField.text ?: @"" success:^(MovieRealm *response) {
         
                 self.movieFromSearchResult = response;
-        
+               
+                NSLog(@"%@", response.poster);
+                NSString *urlStringHttps;
+                if(![response.poster isEqualToString:@"N/A"]){
+                    urlStringHttps = [response.poster stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
+                }
+                else{
+                    urlStringHttps = @"https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg";
+                }
+                
+                NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
+                NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
+                _imageFromSearchResult = [UIImage imageWithData:imgData];
+                NSLog(@"Downloaded image");
+                
+                
                 [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
-       
-            
         
             } failure:^(NSError *error) {
                 NSString *errorMessage = [NSString stringWithFormat:@"Error!\n %@", error.description];
@@ -66,7 +93,7 @@
     }
 
 }
-
+/*
 - (void)loadViewImageView:(UIImageView *)imageView fromUrlString:(NSString *)urlString{
     
     NSString *urlStringHttps = [urlString stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
@@ -75,9 +102,10 @@
     imageView.image = [UIImage imageWithData:imgData];
     
     [imageView setNeedsLayout];
-}
+}*/
 
 - (IBAction)savePressed:(id)sender{
+    //NSLog(@"Save not yet implemented");
     [[MoviesListManager sharedInstance] saveData];
 }
 
@@ -95,11 +123,11 @@
     
     MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListCell"];
     
-    Movie *m = [_movies objectAtIndex:indexPath.row];
+    MovieRealm *m = [_movies objectAtIndex:indexPath.row];
     
     cell.titleLabel.text = m.title;
     cell.yearLabel.text = m.year;
-    //cell.posterImageView.image = [UIImageView ];
+    cell.posterImageView.image = [[MoviesListManager sharedInstance] imageForKey:m.key];
     return cell;
 }
 
@@ -120,6 +148,12 @@
     if([segue.identifier isEqualToString:@"ShowDetailsSegue"]){
         DetailsViewController *detailsVC = segue.destinationViewController;
         detailsVC.movie = sender;
+        if(detailsVC.movie.isOnLibrary){
+            detailsVC.poster = [[MoviesListManager sharedInstance] imageForKey:detailsVC.movie.key];
+        }
+        else{
+            detailsVC.poster = _imageFromSearchResult;
+        }
     }
 }
 

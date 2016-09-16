@@ -9,14 +9,13 @@
 #import "Library.h"
 #import "HTTPService.h"
 #import "Mantle.h"
-#import "Movie.h"
 #import "MoviesListManager.h"
 
 static NSString *const kBaseURL = @"https://www.omdbapi.com/";
 
 @implementation Library
 
-- (NSURLSessionDataTask *)getMovieWithName:(NSString *)name success:(void (^)(Movie *response))success failure:(void (^)(NSError *error))failure{
+- (NSURLSessionDataTask *)getMovieWithName:(NSString *)name success:(void (^)(MovieRealm *response))success failure:(void (^)(NSError *error))failure{
     
     NSString *requestUrl = kBaseURL;
     NSDictionary *parameters = @{@"t": name ?: @""};
@@ -29,13 +28,14 @@ static NSString *const kBaseURL = @"https://www.omdbapi.com/";
                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                  
                  NSError *error;
-                 Movie *movie = [MTLJSONAdapter modelOfClass:Movie.class
+                 MovieModel *movieData = [MTLJSONAdapter modelOfClass:MovieModel.class
                                           fromJSONDictionary:responseDictionary error:&error];
                  
                  
-                 movie.isOnLibrary = NO;
+                 MovieRealm *movieRealm = [[MovieRealm alloc] initWithMovieModel:movieData];
+                 movieRealm.isOnLibrary = NO;
                           
-                 success(movie);
+                 success(movieRealm);
                  
              } failure:^(NSURLSessionDataTask *task, NSError *error) {
                  
@@ -45,7 +45,7 @@ static NSString *const kBaseURL = @"https://www.omdbapi.com/";
     
 }
 
-+ (void)addMovie:(Movie *)movie{
++ (void)addMovie:(MovieRealm *)movie{
     [[MoviesListManager sharedInstance] addObject:movie];
 }
 

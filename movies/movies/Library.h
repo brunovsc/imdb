@@ -7,12 +7,12 @@
 //
 
 #import "HTTPService.h"
-#import "Movie.h"
+#import "MovieRealm.h"
 
 @interface Library : HTTPService
 
-- (NSURLSessionDataTask *)getMovieWithName:(NSString *)name success:(void (^)(Movie *response))success failure:(void (^)(NSError *error))failure;
+- (NSURLSessionDataTask *)getMovieWithName:(NSString *)name success:(void (^)(MovieRealm *response))success failure:(void (^)(NSError *error))failure;
 
-+ (void)addMovie:(Movie *)movie;
++ (void)addMovie:(MovieRealm *)movie;
 
 @end
