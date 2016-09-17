@@ -21,14 +21,15 @@
 + (id)sharedInstance;
 - (NSMutableArray *)getMoviesList;
 - (NSMutableDictionary *)getDictionary;
-- (void)addMovie:(MovieRealm *)movie;
+- (void)addNewMovie:(MovieRealm*)movie;
+- (void)addMovieToList:(MovieRealm *)movie;
 - (void)removeMovie:(NSString *)movieTitle;
 - (MovieRealm *)movieInLibrary:(NSString *)movieTitle;
 
 - (void)addImage:(UIImage*)image forKey:(NSString*)key;
 - (UIImage*)imageForKey:(NSString*)key;
 
-- (void)saveData;
+- (void)saveAllData;
 - (void)loadData;
 
 

@@ -15,9 +15,11 @@
 @property (strong, nonatomic) MovieRealm *movieFromSearchResult;
 @property (strong, nonatomic) UIImage *imageFromSearchResult;
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @property (weak, nonatomic) IBOutlet UILabel *imdbLabel;
 
-@property (strong, atomic) NSMutableArray *movies;
+@property (strong, atomic) NSArray *movies;
 
 @end
 
@@ -26,10 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _movies = [[MoviesListManager sharedInstance] getMoviesList];
-    
-    UIFont *font = _imdbLabel.font;
-    _imdbLabel.font = [font fontWithSize:24];
+    //_movies = [[MoviesListManager sharedInstance] getMoviesList];
+    _movies = [[[MoviesListManager sharedInstance] getMoviesList] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = ((MovieRealm*)a).title;
+        NSString *second = ((MovieRealm*)b).title;
+        return [first compare:second];
+    }];
     
     [_tableView reloadData];
     
@@ -38,13 +42,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (UIImage*)downloadAndSaveImage:(NSString*)url{
-    
-    
-    
-    return nil;
 }
 
 
@@ -73,8 +70,7 @@
                 NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
                 NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
                 _imageFromSearchResult = [UIImage imageWithData:imgData];
-                NSLog(@"Downloaded image");
-                
+                NSLog(@"Downloaded image");                
                 
                 [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
         
@@ -93,37 +89,25 @@
     }
 
 }
-/*
-- (void)loadViewImageView:(UIImageView *)imageView fromUrlString:(NSString *)urlString{
-    
-    NSString *urlStringHttps = [urlString stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
-    NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
-    NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
-    imageView.image = [UIImage imageWithData:imgData];
-    
-    [imageView setNeedsLayout];
-}*/
 
 - (IBAction)savePressed:(id)sender{
-    //NSLog(@"Save not yet implemented");
-    [[MoviesListManager sharedInstance] saveData];
+    [[MoviesListManager sharedInstance] saveAllData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [_movies count];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_movies objectAtIndex:indexPath.row]];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListCell"];
     
-    MovieRealm *m = [_movies objectAtIndex:indexPath.row];
+    MovieRealm *m;
+    m = [_movies objectAtIndex:indexPath.row];
     
     cell.titleLabel.text = m.title;
     cell.yearLabel.text = m.year;
@@ -148,7 +132,7 @@
     if([segue.identifier isEqualToString:@"ShowDetailsSegue"]){
         DetailsViewController *detailsVC = segue.destinationViewController;
         detailsVC.movie = sender;
-        if(detailsVC.movie.isOnLibrary){
+        if(detailsVC.movie.onDatabase){
             detailsVC.poster = [[MoviesListManager sharedInstance] imageForKey:detailsVC.movie.key];
         }
         else{

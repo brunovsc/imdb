@@ -23,12 +23,12 @@
 @property (strong, nonatomic) NSString *language;//
 @property (strong, nonatomic) NSString *country;//
 @property (strong, nonatomic) NSString *awards;//
-@property (strong, nonatomic) NSString *poster;
+@property (strong, nonatomic) NSString *poster;//
 @property (strong, nonatomic) NSString *metascore;
-@property (strong, nonatomic) NSString *imdbRating;
+@property (strong, nonatomic) NSString *imdbRating;//
 @property (strong, nonatomic) NSString *imdbVotes;
 @property (strong, nonatomic) NSString *imdbID;
-@property (strong, nonatomic) NSString *type;
-@property (strong, nonatomic) NSString *response;
+@property (strong, nonatomic) NSString *type; // movie or series (if series, field numberOfSeasons)
+@property (strong, nonatomic) NSString *response; // true or false (if false, field error)
 
 @end

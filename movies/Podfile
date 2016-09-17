@@ -10,6 +10,9 @@ target ‘movies’ do
   pod 'Mantle', '2.0.6'
   pod 'MBProgressHUD', '0.9.2'
   pod 'Realm'
+  
+  
+  pod 'HCSStarRatingView', '~> 1.4.5'
 
   target ‘moviesTests' do
     inherit! :search_paths

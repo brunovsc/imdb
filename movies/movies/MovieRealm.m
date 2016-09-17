@@ -77,10 +77,10 @@
         self.year = MM.year;
         self.released = MM.released;
         self.runtime = MM.runtime;
-        self.genre = MM.genre;
+        self.genre = [MM.genre stringByReplacingOccurrencesOfString:@", " withString:@"\n"];
         self.director = MM.director;
-        self.writer = MM.writer;
-        self.actors = MM.actors;
+        self.writer = [MM.writer stringByReplacingOccurrencesOfString:@", " withString:@"\n"];
+        self.actors = [MM.actors stringByReplacingOccurrencesOfString:@", " withString:@"\n"];
         self.plot = MM.plot;
         self.language = MM.language;
         self.country = MM.country;

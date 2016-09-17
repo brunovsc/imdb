@@ -12,7 +12,6 @@
 
 @interface MovieRealm : RLMObject <NSCopying>
 
-@property (atomic) BOOL isOnLibrary;
 @property (atomic) BOOL onDatabase;
 
 @property (strong, nonatomic) NSString *key;

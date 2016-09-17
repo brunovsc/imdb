@@ -33,7 +33,7 @@ static NSString *const kBaseURL = @"https://www.omdbapi.com/";
                  
                  
                  MovieRealm *movieRealm = [[MovieRealm alloc] initWithMovieModel:movieData];
-                 movieRealm.isOnLibrary = NO;
+                 movieRealm.onDatabase = NO;
                           
                  success(movieRealm);
                  

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HCSStarRatingView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,16 +52,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>216F3457D334D4CF43B7907332369A84</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>344B316B0DBBAF08C0CE4E59C24D1194</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>37E03FC1A4FA30C44FEDD23AB1F249E0</key>
 		<dict>
 			<key>primary</key>
@@ -68,6 +63,21 @@
 			<true/>
 		</dict>
 		<key>426BC4549A625B5E1E4200D5261A98BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6233211620B01DBFDD4BDC6A0CC71DC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A8488902FAD1650405BAE38299A468E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C858EA584DA1DB1FA01D31F47B1B028E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
