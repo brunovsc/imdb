@@ -28,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    //_movies = [[MoviesListManager sharedInstance] getMoviesList];
     _movies = [[[MoviesListManager sharedInstance] getMoviesList] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = ((MovieRealm*)a).title;
         NSString *second = ((MovieRealm*)b).title;
@@ -56,23 +55,30 @@
         
             [[Library sharedHTTPService] getMovieWithName:self.movieNameTextField.text ?: @"" success:^(MovieRealm *response) {
         
-                self.movieFromSearchResult = response;
+                if(! [response.response isEqualToString:@"False"]){
+                
+                
+                    self.movieFromSearchResult = response;
                
-                NSLog(@"%@", response.poster);
-                NSString *urlStringHttps;
-                if(![response.poster isEqualToString:@"N/A"]){
-                    urlStringHttps = [response.poster stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
+                    NSLog(@"%@", response.poster);
+                    NSString *urlStringHttps;
+                    if(![response.poster isEqualToString:@"N/A"]){
+                        urlStringHttps = [response.poster stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
+                    }
+                    else{
+                        urlStringHttps = @"https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg";
+                    }
+                
+                    NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
+                    NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
+                    _imageFromSearchResult = [UIImage imageWithData:imgData];
+                    NSLog(@"Downloaded image");
+                
+                    [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
                 }
                 else{
-                    urlStringHttps = @"https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg";
+                    [self showErrorMessage:@"Movie not found"];
                 }
-                
-                NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
-                NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
-                _imageFromSearchResult = [UIImage imageWithData:imgData];
-                NSLog(@"Downloaded image");                
-                
-                [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
         
             } failure:^(NSError *error) {
                 NSString *errorMessage = [NSString stringWithFormat:@"Error!\n %@", error.description];
@@ -118,7 +124,7 @@
 - (void)showErrorMessage:(NSString *)errorMessage{
     
     UIAlertView *alert = [[UIAlertView alloc]
-                        initWithTitle:@"ERROR"
+                        initWithTitle:@"Error"
                         message:errorMessage
                         delegate:self
                         cancelButtonTitle:@"OK"
