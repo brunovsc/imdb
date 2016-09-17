@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RLMObject.h"
+#import <Realm/RLMObject.h>
 #import "MovieModel.h"
 
 @interface MovieRealm : RLMObject <NSCopying>

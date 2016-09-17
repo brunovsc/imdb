@@ -23,7 +23,8 @@
     [_movieYearInfoLabel setText:movie.year];
     [_movieRuntimeInfoLabel setText:movie.runtime];
     [_movieGenreInfoLabel setText:movie.genre];
-    [_movieRatingInfoLabel setText:movie.imdbRating];
+    
+    [_movieRatingInfoView setValue:([movie.imdbRating floatValue] / 2)];
     
     [_moviePlotInfoLabel setText:movie.plot];
     [_movieWriterInfoLabel setText:movie.writer];
@@ -36,6 +37,17 @@
     [_moviePosterImageView setImage:_poster];
     [_moviePosterImageView setNeedsDisplay];
     [_moviePosterImageView setNeedsLayout];
+    /*
+    HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+    starRatingView.maximumValue = 5;
+    starRatingView.minimumValue = 0;
+    starRatingView.value = [movie.imdbRating floatValue] / 2;
+    [starRatingView setUserInteractionEnabled:NO];
+    starRatingView.tintColor = [UIColor yellowColor];
+    starRatingView.accurateHalfStars = YES;
+    [starRatingView addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:starRatingView];
+     */
     
     if(movie.onDatabase == YES){
         [_addToLibraryButton setTitle:@"Delete" forState:UIControlStateNormal];

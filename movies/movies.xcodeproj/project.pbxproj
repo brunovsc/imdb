@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		177143FC6FC6CF006C0642DE /* libPods-moviesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4155E61B99D298DC3CAB0768 /* libPods-moviesTests.a */; };
+		4D1B6E8E0CFB1D3041963683 /* Pods_moviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7EFF9F79368E8235E226730 /* Pods_moviesUITests.framework */; };
+		A27FF4117ADE4F9929D60D85 /* Pods_moviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F02E67CE6209EECD8F6E002 /* Pods_moviesTests.framework */; };
+		AB2ED9EA1D8DF53900435C60 /* MBProgressHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2ED9E91D8DF53900435C60 /* MBProgressHUDHelper.m */; };
 		AB2FBD3B1D8AE2BD009EEDF0 /* MovieRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FBD3A1D8AE2BD009EEDF0 /* MovieRealm.m */; };
 		AB2FBD471D8AE53E009EEDF0 /* MovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FBD461D8AE53E009EEDF0 /* MovieModel.m */; };
 		AB31E5C11D88434800689BD0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB31E5C01D88434800689BD0 /* libsqlite3.tbd */; };
@@ -23,10 +25,8 @@
 		AB82A9161D860C8B00A5180D /* HTTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9151D860C8B00A5180D /* HTTPService.m */; };
 		AB82A9191D860C9700A5180D /* MoviesListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9181D860C9700A5180D /* MoviesListManager.m */; };
 		AB82A9211D8629B600A5180D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9201D8629B600A5180D /* DetailsViewController.m */; };
-		AB82A9251D86492100A5180D /* MBProgressHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A9241D86492100A5180D /* MBProgressHUDHelper.m */; };
 		ABF97BAC1D899F46007478FF /* MovieListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF97BAB1D899F46007478FF /* MovieListTableViewCell.m */; };
-		BAF98468E1D86D7147DB6A06 /* libPods-movies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1452CBCECD39A0D803309FD3 /* libPods-movies.a */; };
-		CD5EFB65F5CF223D60EB067C /* libPods-moviesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D06EE2A899BE5A14E7569D3 /* libPods-moviesUITests.a */; };
+		AEE60E343E208AB4FFC9A948 /* Pods_movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B15D49590EBBCFA389CC30AF /* Pods_movies.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,12 +48,12 @@
 
 /* Begin PBXFileReference section */
 		113EC57522D2644343211184 /* Pods-moviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-moviesTests/Pods-moviesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1452CBCECD39A0D803309FD3 /* libPods-movies.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movies.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E43C6ECF5C1CCA94EDFE18 /* Pods-moviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-moviesUITests/Pods-moviesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		37C13B3142103A42FED79DDC /* Pods-moviesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-moviesTests/Pods-moviesTests.release.xcconfig"; sourceTree = "<group>"; };
-		4155E61B99D298DC3CAB0768 /* libPods-moviesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F02E67CE6209EECD8F6E002 /* Pods_moviesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moviesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		773FA1D6E006F8845C042EA1 /* Pods-movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-movies/Pods-movies.debug.xcconfig"; sourceTree = "<group>"; };
-		7D06EE2A899BE5A14E7569D3 /* libPods-moviesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB2ED9E81D8DF53900435C60 /* MBProgressHUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUDHelper.h; sourceTree = "<group>"; };
+		AB2ED9E91D8DF53900435C60 /* MBProgressHUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUDHelper.m; sourceTree = "<group>"; };
 		AB2FBD391D8AE2BD009EEDF0 /* MovieRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieRealm.h; sourceTree = "<group>"; };
 		AB2FBD3A1D8AE2BD009EEDF0 /* MovieRealm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieRealm.m; sourceTree = "<group>"; };
 		AB2FBD451D8AE53E009EEDF0 /* MovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieModel.h; sourceTree = "<group>"; };
@@ -83,10 +83,10 @@
 		AB82A9181D860C9700A5180D /* MoviesListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviesListManager.m; sourceTree = "<group>"; };
 		AB82A91F1D8629B600A5180D /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		AB82A9201D8629B600A5180D /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
-		AB82A9231D86492100A5180D /* MBProgressHUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUDHelper.h; sourceTree = "<group>"; };
-		AB82A9241D86492100A5180D /* MBProgressHUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUDHelper.m; sourceTree = "<group>"; };
 		ABF97BAA1D899F46007478FF /* MovieListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieListTableViewCell.h; sourceTree = "<group>"; };
 		ABF97BAB1D899F46007478FF /* MovieListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieListTableViewCell.m; sourceTree = "<group>"; };
+		B15D49590EBBCFA389CC30AF /* Pods_movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7EFF9F79368E8235E226730 /* Pods_moviesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moviesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D959C6F6247C98ED41CFEF54 /* Pods-moviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-moviesUITests/Pods-moviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F955991F69F9144BECB6CACF /* Pods-movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movies.release.xcconfig"; path = "Pods/Target Support Files/Pods-movies/Pods-movies.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,7 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB31E5C11D88434800689BD0 /* libsqlite3.tbd in Frameworks */,
-				BAF98468E1D86D7147DB6A06 /* libPods-movies.a in Frameworks */,
+				AEE60E343E208AB4FFC9A948 /* Pods_movies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				177143FC6FC6CF006C0642DE /* libPods-moviesTests.a in Frameworks */,
+				A27FF4117ADE4F9929D60D85 /* Pods_moviesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD5EFB65F5CF223D60EB067C /* libPods-moviesUITests.a in Frameworks */,
+				4D1B6E8E0CFB1D3041963683 /* Pods_moviesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				AB31E5C01D88434800689BD0 /* libsqlite3.tbd */,
-				1452CBCECD39A0D803309FD3 /* libPods-movies.a */,
-				4155E61B99D298DC3CAB0768 /* libPods-moviesTests.a */,
-				7D06EE2A899BE5A14E7569D3 /* libPods-moviesUITests.a */,
+				B15D49590EBBCFA389CC30AF /* Pods_movies.framework */,
+				6F02E67CE6209EECD8F6E002 /* Pods_moviesTests.framework */,
+				D7EFF9F79368E8235E226730 /* Pods_moviesUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,8 +257,8 @@
 		AB82A9221D8648F500A5180D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				AB82A9231D86492100A5180D /* MBProgressHUDHelper.h */,
-				AB82A9241D86492100A5180D /* MBProgressHUDHelper.m */,
+				AB2ED9E81D8DF53900435C60 /* MBProgressHUDHelper.h */,
+				AB2ED9E91D8DF53900435C60 /* MBProgressHUDHelper.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -540,9 +540,9 @@
 				AB82A9161D860C8B00A5180D /* HTTPService.m in Sources */,
 				AB2FBD471D8AE53E009EEDF0 /* MovieModel.m in Sources */,
 				AB82A8DB1D860B3F00A5180D /* AppDelegate.m in Sources */,
-				AB82A9251D86492100A5180D /* MBProgressHUDHelper.m in Sources */,
 				AB82A8D81D860B3F00A5180D /* main.m in Sources */,
 				AB82A9211D8629B600A5180D /* DetailsViewController.m in Sources */,
+				AB2ED9EA1D8DF53900435C60 /* MBProgressHUDHelper.m in Sources */,
 				ABF97BAC1D899F46007478FF /* MovieListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

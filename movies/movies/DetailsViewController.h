@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <HCSStarRatingView/HCSStarRatingView.h>
 #import "Library.h"
 #import "MoviesListManager.h"
 
@@ -24,7 +25,9 @@
 @property IBOutlet UILabel *movieYearInfoLabel;
 @property IBOutlet UILabel *movieRuntimeInfoLabel;
 @property IBOutlet UILabel *movieGenreInfoLabel;
-@property IBOutlet UILabel *movieRatingInfoLabel;
+
+//@property IBOutlet UILabel *movieRatingInfoView;
+@property (weak, nonatomic) IBOutlet HCSStarRatingView *movieRatingInfoView;
 
 
 @property IBOutlet UILabel *movieReleasedLabel;

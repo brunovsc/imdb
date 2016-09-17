@@ -118,6 +118,7 @@
     cell.titleLabel.text = m.title;
     cell.yearLabel.text = m.year;
     cell.posterImageView.image = [[MoviesListManager sharedInstance] imageForKey:m.key];
+    [cell.starRatingView setValue:([m.imdbRating floatValue] / 2)];
     return cell;
 }
 
