@@ -18,14 +18,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Setting Movie data to the main fields
     [_movieTitleInfoLabel setText:movie.title];
-    [_movieYearInfoLabel setText:movie.year];
+    [_movieReleasedInfoLabel setText:movie.released];
     [_movieRuntimeInfoLabel setText:movie.runtime];
     [_movieGenreInfoLabel setText:movie.genre];
     
+    // Setting the poster
+    [_moviePosterImageView setImage:_poster];
+    [_moviePosterImageView setNeedsDisplay];
+    
+    // Setting the value to the star rating view
     [_movieRatingInfoView setValue:([movie.imdbRating floatValue] / 2)];
     
+    // Setting Movie data to the More Info fields
     [_moviePlotInfoLabel setText:movie.plot];
     [_movieWriterInfoLabel setText:movie.writer];
     [_movieDirectorInfoLabel setText:movie.director];
@@ -34,86 +41,65 @@
     [_movieCountryInfoLabel setText:movie.country];
     [_movieLanguageInfoLabel setText:movie.language];
     
-    [_moviePosterImageView setImage:_poster];
-    [_moviePosterImageView setNeedsDisplay];
-    [_moviePosterImageView setNeedsLayout];
-    /*
-    HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
-    starRatingView.maximumValue = 5;
-    starRatingView.minimumValue = 0;
-    starRatingView.value = [movie.imdbRating floatValue] / 2;
-    [starRatingView setUserInteractionEnabled:NO];
-    starRatingView.tintColor = [UIColor yellowColor];
-    starRatingView.accurateHalfStars = YES;
-    [starRatingView addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:starRatingView];
-     */
-    
-    if(movie.onDatabase == YES){
-        [_addToLibraryButton setTitle:@"Delete" forState:UIControlStateNormal];
-    }
-    else{
-        [_addToLibraryButton setTitle:@"Save" forState:UIControlStateNormal];
-
-    }
+    // Changing the text in the button to "save" or "delete"
+    if(movie.onDatabase == YES) [_libraryButton setTitle:@"Delete" forState:UIControlStateNormal];
+    else [_libraryButton setTitle:@"Save" forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)addToLibrary:(id)sender {
+- (IBAction)libraryButton:(id)sender{
+    // Handles the button related to Library in the view
+    if(movie.onDatabase == NO)
+        [self addToLibrary];
+    else
+        [self removeFromLibrary];
+}
+
+- (void)addToLibrary{
     
-    if(movie.onDatabase == NO){
-        
-        NSString * keyString = [[movie.title lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        movie.key = keyString;
-        
-        [_addToLibraryButton setTitle:@"Delete" forState:UIControlStateNormal];
-        [[MoviesListManager sharedInstance] addImage:_poster forKey:keyString];
-        [[MoviesListManager sharedInstance] addNewMovie:movie];
-        
-        NSString *addMessage = [NSString stringWithFormat:@"%@ added to your library. It will be available offline", movie.title];
-        UIAlertView *messageAlert = [[UIAlertView alloc]
-                                     initWithTitle:@"Done"
-                                     message:addMessage
-                                     delegate:nil
-                                     cancelButtonTitle:@"OK"
-                                     otherButtonTitles:nil];
-        
-        // Display Alert Message
-        [messageAlert show];
-    }
-    else{
-        //movie.isOnLibrary = NO;
-        NSString *movieTitle = movie.title;
-        [_addToLibraryButton setTitle:@"Save" forState:UIControlStateNormal];
-        [[MoviesListManager sharedInstance] removeMovie:movieTitle];
-        NSString *remMessage = [NSString stringWithFormat:@"%@ removed from your library. It will not be available offline", movieTitle];
-        UIAlertView *messageAlert = [[UIAlertView alloc]
-                                     initWithTitle:@"Done"
-                                     message:remMessage
-                                     delegate:nil
-                                     cancelButtonTitle:@"OK"
-                                     otherButtonTitles:nil];
-        
-        // Display Alert Message
-        [messageAlert show];
-        
-    }
-    [_addToLibraryButton setNeedsLayout];
+    NSString * keyString = [[movie.title lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    movie.key = keyString;
+    
+    [[MoviesListManager sharedInstance] addImage:_poster forKey:keyString];
+    [[MoviesListManager sharedInstance] addNewMovie:movie];
+    
+    NSString *addMessage = [NSString stringWithFormat:@"%@ was added to your library. It is now available offline", movie.title];
+    [self showMessage:addMessage];
+    
+    [_libraryButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [_libraryButton setNeedsLayout];
 }
 
-/*
-#pragma mark - Navigation
+- (void)removeFromLibrary{
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSString *movieTitle = movie.title;
+    
+    [[MoviesListManager sharedInstance] removeMovie:movieTitle];
+    
+    NSString *remMessage = [NSString stringWithFormat:@"%@ was removed from your library. It is not available offline", movieTitle];
+    [self showMessage:remMessage];
+    
+    [_libraryButton setTitle:@"Save" forState:UIControlStateNormal];
+    [_libraryButton setNeedsLayout];
 }
-*/
+
+- (void)showMessage:(NSString *)message{
+    
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Done!"
+                                                                        message:message
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleDestructive
+                                                        handler:^(UIAlertAction *action) {}];
+    [controller addAction:alertAction];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+
 
 @end

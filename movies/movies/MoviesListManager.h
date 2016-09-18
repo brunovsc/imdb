@@ -32,6 +32,7 @@
 - (void)saveAllData;
 - (void)loadData;
 
+- (NSMutableArray*)searchMoviesWithKey:(NSString*)text;
 
 @end
 

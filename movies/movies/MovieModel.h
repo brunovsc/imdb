@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) NSString *title;//
 @property (strong, nonatomic) NSString *year;//
-@property (strong, nonatomic) NSString *released;
+@property (strong, nonatomic) NSString *released;//
 @property (strong, nonatomic) NSString *runtime;//
 @property (strong, nonatomic) NSString *genre;//
 @property (strong, nonatomic) NSString *director;//

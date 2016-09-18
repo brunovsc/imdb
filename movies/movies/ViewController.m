@@ -10,57 +10,36 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *movieNameTextField;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) MovieRealm *movieFromSearchResult;
-@property (strong, nonatomic) UIImage *imageFromSearchResult;
-
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
-@property (weak, nonatomic) IBOutlet UILabel *imdbLabel;
-
-@property (strong, atomic) NSArray *movies;
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    _movies = [[[MoviesListManager sharedInstance] getMoviesList] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = ((MovieRealm*)a).title;
-        NSString *second = ((MovieRealm*)b).title;
-        return [first compare:second];
-    }];
     
+    _movies = [[MoviesListManager sharedInstance] getMoviesList];
     [_tableView reloadData];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
 
 -(IBAction)searchPressed:(id)sender{
     [_movieNameTextField resignFirstResponder];
     
     if(![self.movieNameTextField.text isEqualToString:@""]){
-        [MBProgressHUDHelper showMBProgressInView:self.view withAnimationType:MBProgressHUDModeIndeterminate withTitle:@"Searching movie info..."];
+        [MBProgressHUDHelper showMBProgressInView:self.view withAnimationType:MBProgressHUDModeIndeterminate withTitle:@"Searching..."];
     
-        MovieRealm *m = [[MoviesListManager sharedInstance] movieInLibrary:self.movieNameTextField.text];
-        if(m == nil){
+        if([_searchResultArray count] == 0){
         
             [[Library sharedHTTPService] getMovieWithName:self.movieNameTextField.text ?: @"" success:^(MovieRealm *response) {
         
                 if(! [response.response isEqualToString:@"False"]){
                 
-                
                     self.movieFromSearchResult = response;
                
-                    NSLog(@"%@", response.poster);
                     NSString *urlStringHttps;
                     if(![response.poster isEqualToString:@"N/A"]){
                         urlStringHttps = [response.poster stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
@@ -72,7 +51,6 @@
                     NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
                     NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
                     _imageFromSearchResult = [UIImage imageWithData:imgData];
-                    NSLog(@"Downloaded image");
                 
                     [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
                 }
@@ -86,12 +64,36 @@
             }];
         }
         else {
-            [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:m];
+            MovieRealm *m = [_searchResultArray objectAtIndex:0];
+            NSString *message = [NSString stringWithFormat:@"Your search would return a movie that is already in your database"];
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Warning"
+                                                                                message:message
+                                                                         preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *showMovieAction = [UIAlertAction actionWithTitle:@"Show Movie"
+                                                                style:UIAlertActionStyleDestructive
+                                                                    handler:^(UIAlertAction *action) {
+                                                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                                        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:m];
+                                                                    
+                                                                }];
+            
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Dismiss"
+                                                                style:UIAlertActionStyleDestructive
+                                                                handler:^(UIAlertAction *action){
+                                                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                                    [controller dismissViewControllerAnimated:YES completion:nil];
+                                                                }];
+            
+            [controller addAction:showMovieAction];
+            [controller addAction:alertAction];
+            [self presentViewController:controller animated:YES completion:nil];
         }
     }
     else {
-        NSString *errorMessage = @"Empty string\n";
+        NSString *errorMessage = @"Empty string";
         [self showErrorMessage:errorMessage];
+        [self restartSearchText];
     }
 
 }
@@ -101,11 +103,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_movies count];
+    if(![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]){
+        
+        if(![_movieNameTextField.text isEqualToString:@""])
+            return [_searchResultArray count];
+        else
+            return [_movies count];
+    }
+    else return [_movies count];
+}
+
+- (IBAction)restartSearchText{
+    [_movieNameTextField setText:@"Search Movie or Serie"];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_movies objectAtIndex:indexPath.row]];
+    if([_searchResultArray count] > 0)
+        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_searchResultArray objectAtIndex:indexPath.row]];
+    else
+        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_movies objectAtIndex:indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -113,7 +129,11 @@
     MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListCell"];
     
     MovieRealm *m;
-    m = [_movies objectAtIndex:indexPath.row];
+    
+    if([_searchResultArray count] > 0)
+        m = [_searchResultArray objectAtIndex:indexPath.row];
+    else
+        m = [_movies objectAtIndex:indexPath.row];
     
     cell.titleLabel.text = m.title;
     cell.yearLabel.text = m.year;
@@ -124,14 +144,16 @@
 
 - (void)showErrorMessage:(NSString *)errorMessage{
     
-    UIAlertView *alert = [[UIAlertView alloc]
-                        initWithTitle:@"Error"
-                        message:errorMessage
-                        delegate:self
-                        cancelButtonTitle:@"OK"
-                        otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Error!"
+                                                                        message:errorMessage
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Dismiss"
+                                                          style:UIAlertActionStyleDestructive
+                                                        handler:^(UIAlertAction *action) {  }];
+    [controller addAction:alertAction];
+    [self presentViewController:controller animated:YES completion:nil];
+
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
@@ -148,5 +170,13 @@
     }
 }
 
+- (IBAction)typingSearch:(id)sender{
+    _searchResultArray = [[MoviesListManager sharedInstance] searchMoviesWithKey:_movieNameTextField.text];
+    [_tableView reloadData];
+}
+
+- (IBAction)touchCancelSearch:(id)sender{
+    [_searchResultArray removeAllObjects];
+}
 
 @end

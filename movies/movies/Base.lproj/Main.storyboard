@@ -166,7 +166,7 @@
                                 <color key="textColor" red="0.99607843137254903" green="0.96470588235294119" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Search Movie or Serie" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="swV-lL-aHI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Search Movie or Serie" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="swV-lL-aHI">
                                 <rect key="frame" x="10" y="92" width="500" height="30"/>
                                 <color key="backgroundColor" red="0.99215686274509807" green="0.95686274509803926" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -180,6 +180,10 @@
                                         <exclude reference="35H-qh-MpG"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="touchCancelSearch:" destination="BYZ-38-t0r" eventType="touchCancel" id="fiZ-5x-Y8V"/>
+                                    <action selector="typingSearch:" destination="BYZ-38-t0r" eventType="editingChanged" id="QIF-Sl-sZT"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.32156862745098036" green="0.33333333333333331" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,17 +263,17 @@
                                 <color key="tintColor" red="0.74901960784313726" green="0.71764705882352942" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Add / Remove - Library"/>
                                 <connections>
-                                    <action selector="addToLibrary:" destination="aLg-40-kJg" eventType="touchUpInside" id="EXZ-4e-4Ia"/>
+                                    <action selector="libraryButton:" destination="aLg-40-kJg" eventType="touchUpInside" id="hKD-8Y-eKd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-0J-Qkp">
-                                <rect key="frame" x="210" y="83" width="39" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Released:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-0J-Qkp">
+                                <rect key="frame" x="210" y="83" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHJ-k0-bQ8">
-                                <rect key="frame" x="259" y="83" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Released" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHJ-k0-bQ8">
+                                <rect key="frame" x="295" y="83" width="121" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -308,7 +312,7 @@
                                 <rect key="frame" x="0.0" y="409" width="600" height="561"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwR-E5-4KB" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="268"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="328"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xv5-Dv-gn6">
                                                 <rect key="frame" x="256" y="5" width="89" height="26"/>
@@ -322,80 +326,80 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Movie Plot" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKH-vu-HeJ">
-                                                <rect key="frame" x="55" y="41" width="535" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" verticalHuggingPriority="251" text="Movie Plot" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKH-vu-HeJ">
+                                                <rect key="frame" x="101" y="41" width="489" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Writer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoS-ve-frf">
-                                                <rect key="frame" x="10" y="72" width="52" height="21"/>
+                                                <rect key="frame" x="10" y="82" width="52" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Movie Writer" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDv-6D-WNY">
-                                                <rect key="frame" x="72" y="72" width="518" height="21"/>
+                                                <rect key="frame" x="101" y="82" width="489" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Director:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXP-WK-CHW">
-                                                <rect key="frame" x="10" y="103" width="67" height="21"/>
+                                                <rect key="frame" x="10" y="123" width="67" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Movie Director" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjF-UK-ffA">
-                                                <rect key="frame" x="87" y="103" width="503" height="21"/>
+                                                <rect key="frame" x="101" y="123" width="489" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Actors:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaD-uy-eOl">
-                                                <rect key="frame" x="10" y="134" width="55" height="21"/>
+                                                <rect key="frame" x="10" y="164" width="55" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Movie Actors" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uze-h6-MMP">
-                                                <rect key="frame" x="75" y="134" width="515" height="21"/>
+                                                <rect key="frame" x="101" y="164" width="489" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Awards:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHK-iT-fDA">
-                                                <rect key="frame" x="10" y="165" width="61" height="21"/>
+                                                <rect key="frame" x="10" y="205" width="61" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Country:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ts8-Yr-lIh">
-                                                <rect key="frame" x="10" y="196" width="66" height="21"/>
+                                                <rect key="frame" x="10" y="246" width="66" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-Kq-Wgh">
-                                                <rect key="frame" x="86" y="196" width="112" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Country" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-Kq-Wgh">
+                                                <rect key="frame" x="101" y="246" width="112" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Language:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MS-zr-XuV">
-                                                <rect key="frame" x="10" y="227" width="81" height="21"/>
+                                                <rect key="frame" x="10" y="287" width="81" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4X-u0-gXW">
-                                                <rect key="frame" x="101" y="227" width="126" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Language" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4X-u0-gXW">
+                                                <rect key="frame" x="101" y="287" width="126" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Movie Awards" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JhY-nh-LsF">
-                                                <rect key="frame" x="81" y="165" width="509" height="21"/>
+                                                <rect key="frame" x="101" y="205" width="489" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -403,14 +407,17 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.99215686274509807" green="0.95686274509803926" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="ts8-Yr-lIh" firstAttribute="top" secondItem="JhY-nh-LsF" secondAttribute="bottom" constant="10" id="19W-UC-rlg"/>
+                                            <constraint firstItem="uze-h6-MMP" firstAttribute="leading" secondItem="p4X-u0-gXW" secondAttribute="leading" id="0h6-R3-d2Y"/>
+                                            <constraint firstItem="ts8-Yr-lIh" firstAttribute="top" secondItem="JhY-nh-LsF" secondAttribute="bottom" constant="20" id="19W-UC-rlg"/>
                                             <constraint firstAttribute="trailing" secondItem="RDv-6D-WNY" secondAttribute="trailing" constant="10" id="1pU-L0-wlC"/>
                                             <constraint firstItem="9fz-fN-RTn" firstAttribute="top" secondItem="Xv5-Dv-gn6" secondAttribute="bottom" constant="10" id="46T-AX-dJC"/>
-                                            <constraint firstItem="yXP-WK-CHW" firstAttribute="top" secondItem="RDv-6D-WNY" secondAttribute="bottom" constant="10" id="5PH-5L-46a"/>
+                                            <constraint firstItem="yXP-WK-CHW" firstAttribute="top" secondItem="RDv-6D-WNY" secondAttribute="bottom" constant="20" id="5PH-5L-46a"/>
                                             <constraint firstItem="ZaD-uy-eOl" firstAttribute="top" secondItem="uze-h6-MMP" secondAttribute="top" id="5iP-Sl-rpw"/>
-                                            <constraint firstItem="OHK-iT-fDA" firstAttribute="top" secondItem="uze-h6-MMP" secondAttribute="bottom" constant="10" id="64c-Pr-tGF"/>
+                                            <constraint firstItem="OHK-iT-fDA" firstAttribute="top" secondItem="uze-h6-MMP" secondAttribute="bottom" constant="20" id="64c-Pr-tGF"/>
+                                            <constraint firstItem="gjF-UK-ffA" firstAttribute="leading" secondItem="p4X-u0-gXW" secondAttribute="leading" id="7HW-By-ejv"/>
                                             <constraint firstItem="JhY-nh-LsF" firstAttribute="leading" secondItem="OHK-iT-fDA" secondAttribute="trailing" constant="10" id="8Cb-8g-Kwe"/>
                                             <constraint firstItem="yXP-WK-CHW" firstAttribute="top" secondItem="gjF-UK-ffA" secondAttribute="top" id="9fo-N5-5RR"/>
+                                            <constraint firstItem="JhY-nh-LsF" firstAttribute="leading" secondItem="p4X-u0-gXW" secondAttribute="leading" id="9l1-l6-l4O"/>
                                             <constraint firstItem="OHK-iT-fDA" firstAttribute="leading" secondItem="XwR-E5-4KB" secondAttribute="leading" constant="10" id="D9p-wv-Dsf"/>
                                             <constraint firstItem="RDv-6D-WNY" firstAttribute="leading" secondItem="xoS-ve-frf" secondAttribute="trailing" constant="10" id="Fuz-HP-59M"/>
                                             <constraint firstItem="7MS-zr-XuV" firstAttribute="top" secondItem="ts8-Yr-lIh" secondAttribute="bottom" constant="10" id="Jrq-J2-uj6"/>
@@ -420,14 +427,15 @@
                                             <constraint firstAttribute="trailing" secondItem="JhY-nh-LsF" secondAttribute="trailing" constant="10" id="PNk-3g-eyR"/>
                                             <constraint firstItem="9fz-fN-RTn" firstAttribute="top" secondItem="IKH-vu-HeJ" secondAttribute="top" id="Qf5-Qn-tv9"/>
                                             <constraint firstItem="p4X-u0-gXW" firstAttribute="top" secondItem="7MS-zr-XuV" secondAttribute="top" id="Usn-Og-kWn"/>
+                                            <constraint firstItem="RDv-6D-WNY" firstAttribute="leading" secondItem="p4X-u0-gXW" secondAttribute="leading" id="W68-fS-kl2"/>
                                             <constraint firstItem="fDp-Kq-Wgh" firstAttribute="top" secondItem="ts8-Yr-lIh" secondAttribute="top" id="Wze-Yv-KzQ"/>
                                             <constraint firstItem="OHK-iT-fDA" firstAttribute="top" secondItem="JhY-nh-LsF" secondAttribute="top" id="Xcc-ak-X1P"/>
                                             <constraint firstItem="ZaD-uy-eOl" firstAttribute="leading" secondItem="XwR-E5-4KB" secondAttribute="leading" constant="10" id="ZV6-1Q-n1B"/>
                                             <constraint firstItem="uze-h6-MMP" firstAttribute="leading" secondItem="ZaD-uy-eOl" secondAttribute="trailing" constant="10" id="cOI-GQ-X5d"/>
                                             <constraint firstItem="9fz-fN-RTn" firstAttribute="leading" secondItem="XwR-E5-4KB" secondAttribute="leading" constant="10" id="gh9-3L-x2X"/>
-                                            <constraint firstItem="xoS-ve-frf" firstAttribute="top" secondItem="IKH-vu-HeJ" secondAttribute="bottom" constant="10" id="hcY-mL-VCD"/>
+                                            <constraint firstItem="xoS-ve-frf" firstAttribute="top" secondItem="IKH-vu-HeJ" secondAttribute="bottom" constant="20" id="hcY-mL-VCD"/>
                                             <constraint firstItem="ts8-Yr-lIh" firstAttribute="leading" secondItem="XwR-E5-4KB" secondAttribute="leading" constant="10" id="iPa-82-QXF"/>
-                                            <constraint firstItem="7MS-zr-XuV" firstAttribute="top" secondItem="fDp-Kq-Wgh" secondAttribute="bottom" constant="10" id="jP2-KH-EDn"/>
+                                            <constraint firstItem="7MS-zr-XuV" firstAttribute="top" secondItem="fDp-Kq-Wgh" secondAttribute="bottom" constant="20" id="jP2-KH-EDn"/>
                                             <constraint firstItem="gjF-UK-ffA" firstAttribute="leading" secondItem="yXP-WK-CHW" secondAttribute="trailing" constant="10" id="kaB-VY-1rr"/>
                                             <constraint firstAttribute="bottom" secondItem="7MS-zr-XuV" secondAttribute="bottom" constant="20" id="m2G-h7-nSr"/>
                                             <constraint firstItem="xoS-ve-frf" firstAttribute="top" secondItem="RDv-6D-WNY" secondAttribute="top" id="mNM-SJ-gJo"/>
@@ -436,13 +444,21 @@
                                             <constraint firstItem="p4X-u0-gXW" firstAttribute="leading" secondItem="7MS-zr-XuV" secondAttribute="trailing" constant="10" id="qfG-H9-Alo"/>
                                             <constraint firstItem="IKH-vu-HeJ" firstAttribute="leading" secondItem="9fz-fN-RTn" secondAttribute="trailing" constant="10" id="srY-AJ-maV"/>
                                             <constraint firstItem="yXP-WK-CHW" firstAttribute="leading" secondItem="XwR-E5-4KB" secondAttribute="leading" constant="10" id="tSo-oK-N4H"/>
+                                            <constraint firstItem="fDp-Kq-Wgh" firstAttribute="leading" secondItem="p4X-u0-gXW" secondAttribute="leading" id="txf-4j-jVb"/>
                                             <constraint firstItem="xoS-ve-frf" firstAttribute="leading" secondItem="XwR-E5-4KB" secondAttribute="leading" constant="10" id="tzh-ei-szW"/>
+                                            <constraint firstItem="IKH-vu-HeJ" firstAttribute="leading" secondItem="p4X-u0-gXW" secondAttribute="leading" id="vT1-Id-Pxg"/>
                                             <constraint firstAttribute="trailing" secondItem="gjF-UK-ffA" secondAttribute="trailing" constant="10" id="vY1-dS-h1B"/>
                                             <constraint firstItem="Xv5-Dv-gn6" firstAttribute="centerX" secondItem="XwR-E5-4KB" secondAttribute="centerX" id="wUc-GW-3BT"/>
-                                            <constraint firstItem="ZaD-uy-eOl" firstAttribute="top" secondItem="gjF-UK-ffA" secondAttribute="bottom" constant="10" id="xu7-bu-5Yf"/>
+                                            <constraint firstItem="ZaD-uy-eOl" firstAttribute="top" secondItem="gjF-UK-ffA" secondAttribute="bottom" constant="20" id="xu7-bu-5Yf"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="srY-AJ-maV"/>
+                                                <exclude reference="Fuz-HP-59M"/>
+                                                <exclude reference="kaB-VY-1rr"/>
+                                                <exclude reference="cOI-GQ-X5d"/>
+                                                <exclude reference="8Cb-8g-Kwe"/>
+                                                <exclude reference="M6Z-s8-vDt"/>
                                                 <exclude reference="Jrq-J2-uj6"/>
                                             </mask>
                                         </variation>
@@ -555,7 +571,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
-                        <outlet property="addToLibraryButton" destination="ljz-0X-3Gj" id="lZ6-ge-Ccj"/>
+                        <outlet property="libraryButton" destination="ljz-0X-3Gj" id="JWm-01-DaM"/>
                         <outlet property="movieActorsInfoLabel" destination="uze-h6-MMP" id="xZK-6P-Eos"/>
                         <outlet property="movieActorsLabel" destination="ZaD-uy-eOl" id="Xqs-Ez-Y4R"/>
                         <outlet property="movieAwardsInfoLabel" destination="JhY-nh-LsF" id="QT6-tO-fj2"/>
@@ -573,18 +589,17 @@
                         <outlet property="moviePosterImageView" destination="ECX-KX-KHZ" id="gax-fu-hNB"/>
                         <outlet property="movieRatingInfoView" destination="8jK-NT-o70" id="2ou-FV-nD3"/>
                         <outlet property="movieRatingLabel" destination="t5K-vQ-EJo" id="OzH-CZ-gC2"/>
+                        <outlet property="movieReleasedInfoLabel" destination="PHJ-k0-bQ8" id="Pyj-Ut-A1D"/>
+                        <outlet property="movieReleasedLabel" destination="YCb-0J-Qkp" id="78p-i4-qzo"/>
                         <outlet property="movieRuntimeInfoLabel" destination="H6Q-PR-1wT" id="Ido-0u-11K"/>
                         <outlet property="movieRuntimeLabel" destination="HeM-7R-mnt" id="Exg-ij-51r"/>
                         <outlet property="movieTitleInfoLabel" destination="qBc-Ci-JnM" id="ahq-JW-Qnz"/>
                         <outlet property="movieWriterInfoLabel" destination="RDv-6D-WNY" id="rfL-aF-K8i"/>
                         <outlet property="movieWriterLabel" destination="xoS-ve-frf" id="GdF-wK-Gjt"/>
-                        <outlet property="movieYearInfoLabel" destination="PHJ-k0-bQ8" id="AaS-dz-9rC"/>
-                        <outlet property="movieYearLabel" destination="YCb-0J-Qkp" id="5Dn-gW-fQh"/>
                         <outlet property="view" destination="ThJ-ww-sso" id="RBA-I2-RBD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D2a-aU-ML4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="6hU-zA-aFE" customClass="HCSStarRatingView"/>
             </objects>
             <point key="canvasLocation" x="932" y="354"/>
         </scene>

@@ -13,24 +13,22 @@
 
 @interface DetailsViewController : UIViewController
 
-
+// Labels to section in the main view
 @property IBOutlet UILabel *movieTitleLabel;
-@property IBOutlet UILabel *movieYearLabel;
+@property IBOutlet UILabel *movieReleasedLabel;
 @property IBOutlet UILabel *movieRuntimeLabel;
 @property IBOutlet UILabel *movieGenreLabel;
 @property IBOutlet UILabel *movieRatingLabel;
 
-
+// Fields with data of the movie in the main view
+@property IBOutlet UIImageView *moviePosterImageView;
 @property IBOutlet UILabel *movieTitleInfoLabel;
-@property IBOutlet UILabel *movieYearInfoLabel;
+@property IBOutlet UILabel *movieReleasedInfoLabel;
 @property IBOutlet UILabel *movieRuntimeInfoLabel;
 @property IBOutlet UILabel *movieGenreInfoLabel;
-
-//@property IBOutlet UILabel *movieRatingInfoView;
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *movieRatingInfoView;
 
-
-@property IBOutlet UILabel *movieReleasedLabel;
+// Labels to section in the More Info view
 @property IBOutlet UILabel *moviePlotLabel;
 @property IBOutlet UILabel *movieWriterLabel;
 @property IBOutlet UILabel *movieDirectorLabel;
@@ -39,8 +37,7 @@
 @property IBOutlet UILabel *movieCountryLabel;
 @property IBOutlet UILabel *movieLanguageLabel;
 
-
-@property IBOutlet UILabel *movieReleasedInfoLabel;
+// Labels with data of the movie in the More Info view
 @property IBOutlet UILabel *moviePlotInfoLabel;
 @property IBOutlet UILabel *movieWriterInfoLabel;
 @property IBOutlet UILabel *movieDirectorInfoLabel;
@@ -49,12 +46,14 @@
 @property IBOutlet UILabel *movieCountryInfoLabel;
 @property IBOutlet UILabel *movieLanguageInfoLabel;
 
-
+// Buttons
 @property IBOutlet UIButton *back;
-@property IBOutlet UIButton *addToLibraryButton;
-@property IBOutlet UIImageView *moviePosterImageView;
+@property IBOutlet UIButton *libraryButton;
 
+// Data coming from callee view
 @property (strong, nonatomic) MovieRealm *movie;
 @property (strong, nonatomic) UIImage *poster;
+
+- (void)showMessage:(NSString *)message;
 
 @end

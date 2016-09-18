@@ -33,6 +33,13 @@
 }
 
 - (NSMutableArray *)getMoviesList{
+    
+    [_moviesList sortUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = ((MovieRealm*)a).title;
+        NSString *second = ((MovieRealm*)b).title;
+        return [first compare:second];
+    }];
+
     return _moviesList;
 }
 
@@ -161,6 +168,21 @@
     
     NSLog(@"Finished loading database");
 
+}
+
+- (NSMutableArray*)searchMoviesWithKey:(NSString*)text{
+    NSString *key = [[text lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [_moviesList count]; i++){
+        MovieRealm *m = [_moviesList objectAtIndex:i];
+        if([m.key containsString:key])
+            [results addObject:m];
+    }
+    
+    return results;
+    
 }
 
 
