@@ -17,12 +17,12 @@
 @property (strong) NSMutableArray *moviesList;
 @property (strong) NSMutableDictionary *searchHelper;
 @property (strong) NSMutableDictionary *movieImages;
+@property BOOL needSort;
 
 + (id)sharedInstance;
 - (NSMutableArray *)getMoviesList;
 - (NSMutableDictionary *)getDictionary;
 - (void)addNewMovie:(MovieRealm*)movie;
-- (void)addMovieToList:(MovieRealm *)movie;
 - (void)removeMovie:(NSString *)movieTitle;
 - (MovieRealm *)movieInLibrary:(NSString *)movieTitle;
 

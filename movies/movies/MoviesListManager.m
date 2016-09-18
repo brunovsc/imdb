@@ -17,6 +17,7 @@
     _moviesList = [[NSMutableArray alloc] init];
     _searchHelper = [[NSMutableDictionary alloc] init];
     _movieImages = [[NSMutableDictionary alloc] init];
+    _needSort = NO;
     
     return self;
 }
@@ -33,12 +34,13 @@
 }
 
 - (NSMutableArray *)getMoviesList{
-    
-    [_moviesList sortUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = ((MovieRealm*)a).title;
-        NSString *second = ((MovieRealm*)b).title;
-        return [first compare:second];
-    }];
+    if(_needSort){
+        [_moviesList sortUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *first = ((MovieRealm*)a).title;
+            NSString *second = ((MovieRealm*)b).title;
+            return [first compare:second];
+        }];
+    }
 
     return _moviesList;
 }
@@ -78,18 +80,14 @@
         NSData * binaryImageData = UIImagePNGRepresentation(poster);
         
         [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:keyPNG] atomically:YES];
+        
+        _needSort = YES;
     }
     else{
         NSLog(@"A movie with the key %@ is already in the database", movie.key);
     }
 
 }
-
-- (void)addMovieToList:(MovieRealm*)movie{
-    [_moviesList addObject:movie];
-    [_searchHelper setObject:movie forKey:movie.key];
-}
-
 - (void)addImage:(UIImage*)image forKey:(NSString*)key{
     [_movieImages setObject:image forKey:key];
 }
@@ -155,7 +153,8 @@
     for(MovieRealm *rMovie in moviesLoaded){
         
         rMovie.onDatabase = YES;
-        [self addMovieToList:rMovie];
+        [_moviesList addObject:rMovie];
+        [_searchHelper setObject:rMovie forKey:rMovie.key];
         
         NSString * keyPNG = [NSString stringWithFormat:@"%@.png",rMovie.key];
         UIImage *poster = [UIImage imageWithContentsOfFile:[basePath stringByAppendingPathComponent:keyPNG]];
@@ -163,6 +162,7 @@
         
         NSLog(@"%@ found in database", rMovie.title);
     }
+    self.needSort = YES;
     
     [realm commitWriteTransaction];
     

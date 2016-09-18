@@ -32,7 +32,8 @@
     if(![self.movieNameTextField.text isEqualToString:@""]){
         [MBProgressHUDHelper showMBProgressInView:self.view withAnimationType:MBProgressHUDModeIndeterminate withTitle:@"Searching..."];
     
-        if([_searchResultArray count] == 0){
+        MovieRealm *m = [[MoviesListManager sharedInstance] movieInLibrary:_movieNameTextField.text];
+        if(m == nil){
         
             [[Library sharedHTTPService] getMovieWithName:self.movieNameTextField.text ?: @"" success:^(MovieRealm *response) {
         
@@ -40,19 +41,27 @@
                 
                     self.movieFromSearchResult = response;
                
-                    NSString *urlStringHttps;
-                    if(![response.poster isEqualToString:@"N/A"]){
-                        urlStringHttps = [response.poster stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
+                    MovieRealm *m2 = [[MoviesListManager sharedInstance] movieInLibrary:response.title];
+                    
+                    if(m2 == nil){
+                    
+                        NSString *urlStringHttps;
+                        if(![response.poster isEqualToString:@"N/A"]){
+                            urlStringHttps = [response.poster stringByReplacingOccurrencesOfString:@"http" withString:@"https"];
+                        }
+                        else{
+                            urlStringHttps = @"https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg";
+                        }
+                    
+                        NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
+                        NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
+                        _imageFromSearchResult = [UIImage imageWithData:imgData];
+                    
+                        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
                     }
                     else{
-                        urlStringHttps = @"https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg";
+                        [self movieAlreadyInLibrary:m2];
                     }
-                
-                    NSURL *imgURL = [NSURL URLWithString:urlStringHttps];
-                    NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
-                    _imageFromSearchResult = [UIImage imageWithData:imgData];
-                
-                    [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:response];
                 }
                 else{
                     [self showErrorMessage:@"Movie not found"];
@@ -64,30 +73,7 @@
             }];
         }
         else {
-            MovieRealm *m = [_searchResultArray objectAtIndex:0];
-            NSString *message = [NSString stringWithFormat:@"Your search would return a movie that is already in your database"];
-            UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Warning"
-                                                                                message:message
-                                                                         preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *showMovieAction = [UIAlertAction actionWithTitle:@"Show Movie"
-                                                                style:UIAlertActionStyleDestructive
-                                                                    handler:^(UIAlertAction *action) {
-                                                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                                        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:m];
-                                                                    
-                                                                }];
-            
-            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Dismiss"
-                                                                style:UIAlertActionStyleDestructive
-                                                                handler:^(UIAlertAction *action){
-                                                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                                    [controller dismissViewControllerAnimated:YES completion:nil];
-                                                                }];
-            
-            [controller addAction:showMovieAction];
-            [controller addAction:alertAction];
-            [self presentViewController:controller animated:YES completion:nil];
+            [self movieAlreadyInLibrary:m];
         }
     }
     else {
@@ -96,6 +82,31 @@
         [self restartSearchText];
     }
 
+}
+
+- (void)movieAlreadyInLibrary:(MovieRealm *)movie{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSString *message = [NSString stringWithFormat:@"Your search returned a movie that is already in your database"];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Warning"
+                                                                        message:message
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *showMovieAction = [UIAlertAction actionWithTitle:@"Show Movie"
+                                                              style:UIAlertActionStyleDestructive
+                                                            handler:^(UIAlertAction *action) {
+                                                                [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:movie];
+                                                                
+                                                            }];
+    
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Dismiss"
+                                                          style:UIAlertActionStyleDestructive
+                                                        handler:^(UIAlertAction *action){
+                                                            [controller dismissViewControllerAnimated:YES completion:nil];
+                                                        }];
+    
+    [controller addAction:showMovieAction];
+    [controller addAction:alertAction];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)savePressed:(id)sender{

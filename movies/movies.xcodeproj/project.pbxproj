@@ -13,6 +13,7 @@
 		AB2FBD3B1D8AE2BD009EEDF0 /* MovieRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FBD3A1D8AE2BD009EEDF0 /* MovieRealm.m */; };
 		AB2FBD471D8AE53E009EEDF0 /* MovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2FBD461D8AE53E009EEDF0 /* MovieModel.m */; };
 		AB31E5C11D88434800689BD0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB31E5C01D88434800689BD0 /* libsqlite3.tbd */; };
+		AB6982B21D8F193F00E4AB47 /* PosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6982B11D8F193F00E4AB47 /* PosterViewController.m */; };
 		AB82A8D81D860B3F00A5180D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8D71D860B3F00A5180D /* main.m */; };
 		AB82A8DB1D860B3F00A5180D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8DA1D860B3F00A5180D /* AppDelegate.m */; };
 		AB82A8DE1D860B3F00A5180D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB82A8DD1D860B3F00A5180D /* ViewController.m */; };
@@ -59,6 +60,8 @@
 		AB2FBD451D8AE53E009EEDF0 /* MovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieModel.h; sourceTree = "<group>"; };
 		AB2FBD461D8AE53E009EEDF0 /* MovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieModel.m; sourceTree = "<group>"; };
 		AB31E5C01D88434800689BD0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		AB6982B01D8F193F00E4AB47 /* PosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosterViewController.h; sourceTree = "<group>"; };
+		AB6982B11D8F193F00E4AB47 /* PosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PosterViewController.m; sourceTree = "<group>"; };
 		AB82A8D31D860B3F00A5180D /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB82A8D71D860B3F00A5180D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB82A8D91D860B3F00A5180D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				AB82A8DD1D860B3F00A5180D /* ViewController.m */,
 				AB82A91F1D8629B600A5180D /* DetailsViewController.h */,
 				AB82A9201D8629B600A5180D /* DetailsViewController.m */,
+				AB6982B01D8F193F00E4AB47 /* PosterViewController.h */,
+				AB6982B11D8F193F00E4AB47 /* PosterViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -538,6 +543,7 @@
 				AB82A9191D860C9700A5180D /* MoviesListManager.m in Sources */,
 				AB2FBD3B1D8AE2BD009EEDF0 /* MovieRealm.m in Sources */,
 				AB82A9161D860C8B00A5180D /* HTTPService.m in Sources */,
+				AB6982B21D8F193F00E4AB47 /* PosterViewController.m in Sources */,
 				AB2FBD471D8AE53E009EEDF0 /* MovieModel.m in Sources */,
 				AB82A8DB1D860B3F00A5180D /* AppDelegate.m in Sources */,
 				AB82A8D81D860B3F00A5180D /* main.m in Sources */,

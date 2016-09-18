@@ -100,6 +100,11 @@
     [self presentViewController:controller animated:YES completion:nil];
 }
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ShowPosterSegue"]){
+        PosterViewController *posterVC = segue.destinationViewController;
+        posterVC.poster = _poster;
+    }
+}
 
 @end

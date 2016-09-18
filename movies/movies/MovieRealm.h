@@ -35,10 +35,7 @@
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *response;
 
-- (MovieRealm *)initWithInfoArray:(NSArray *)info;
-
 - (MovieRealm *)initWithMovieModel:(MovieModel *)MM;
-
-
+- (id)copyWithZone:(NSZone *)zone;
 
 @end

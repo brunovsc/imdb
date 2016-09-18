@@ -10,6 +10,7 @@
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import "Library.h"
 #import "MoviesListManager.h"
+#import "PosterViewController.h"
 
 @interface DetailsViewController : UIViewController
 

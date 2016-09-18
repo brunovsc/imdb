@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *imdbLabel;
 
-@property (weak, nonatomic) IBOutlet UITextField *movieNameTextField;
+@property (strong, atomic) IBOutlet UITextField *movieNameTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) MovieRealm *movieFromSearchResult;
