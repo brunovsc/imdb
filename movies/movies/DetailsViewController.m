@@ -78,6 +78,11 @@
 
     NSString *movieTitle = movie.title;
     
+    if(movie.onDatabase){
+        movie = [movie copy];
+        movie.onDatabase = NO;
+    }
+    
     [[MoviesListManager sharedInstance] removeMovie:movieTitle];
     
     NSString *remMessage = [NSString stringWithFormat:@"%@ was removed from your library. It is not available offline", movieTitle];
@@ -104,6 +109,7 @@
     if([segue.identifier isEqualToString:@"ShowPosterSegue"]){
         PosterViewController *posterVC = segue.destinationViewController;
         posterVC.poster = _poster;
+        posterVC.movie = movie;
     }
 }
 

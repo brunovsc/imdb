@@ -77,8 +77,7 @@
         }
     }
     else {
-        NSString *errorMessage = @"Empty string";
-        [self showErrorMessage:errorMessage];
+        [self showErrorMessage:@"Empty string"];
         [self restartSearchText];
     }
 
@@ -116,8 +115,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]){
         
-        if(![_movieNameTextField.text isEqualToString:@""])
-            return [_searchResultArray count];
+        if(![_movieNameTextField.text isEqualToString:@""]){
+            if([_searchResultArray count] > 0)
+                return [_searchResultArray count];
+            else
+                return 1;
+        }
         else
             return [_movies count];
     }
@@ -132,25 +135,34 @@
     if([_searchResultArray count] > 0)
         [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_searchResultArray objectAtIndex:indexPath.row]];
     else
-        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_movies objectAtIndex:indexPath.row]];
+        if(([_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]) || ([_movieNameTextField.text isEqualToString:@""]))
+            [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_movies objectAtIndex:indexPath.row]];
+        else
+            [self searchPressed:indexPath];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListCell"];
-    
-    MovieRealm *m;
-    
-    if([_searchResultArray count] > 0)
-        m = [_searchResultArray objectAtIndex:indexPath.row];
-    else
-        m = [_movies objectAtIndex:indexPath.row];
-    
-    cell.titleLabel.text = m.title;
-    cell.yearLabel.text = m.year;
-    cell.posterImageView.image = [[MoviesListManager sharedInstance] imageForKey:m.key];
-    [cell.starRatingView setValue:([m.imdbRating floatValue] / 2)];
-    return cell;
+    if( ([_movieNameTextField.text length] > 0) && ([_searchResultArray count] == 0) && (![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]) ){
+        MovieListSearchEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListSearchEmptyTableViewCell"];
+        return cell;
+    }
+    else{
+            MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListCell"];
+        
+            MovieRealm *m;
+            
+            if([_searchResultArray count] > 0)
+                m = [_searchResultArray objectAtIndex:indexPath.row];
+            else
+                m = [_movies objectAtIndex:indexPath.row];
+            
+            cell.titleLabel.text = m.title;
+            cell.yearLabel.text = m.year;
+            cell.posterImageView.image = [[MoviesListManager sharedInstance] imageForKey:m.key];
+            [cell.starRatingView setValue:([m.imdbRating floatValue] / 2)];
+            return cell;
+    }
 }
 
 - (void)showErrorMessage:(NSString *)errorMessage{
@@ -188,6 +200,11 @@
 
 - (IBAction)touchCancelSearch:(id)sender{
     [_searchResultArray removeAllObjects];
+    _isEditing = NO;
+}
+
+- (IBAction)isEditing:(id)sender{
+    _isEditing = YES;
 }
 
 @end

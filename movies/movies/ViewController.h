@@ -12,6 +12,7 @@
 #import "DetailsViewController.h"
 #import "MBProgressHUDHelper.h"
 #import "MovieListTableViewCell.h"
+#import "MovieListSearchEmptyTableViewCell.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) MovieRealm *movieFromSearchResult;
 @property (strong, nonatomic) UIImage *imageFromSearchResult;
 
+@property BOOL isEditing;
 
 @property (strong, atomic) NSArray *movies;
 

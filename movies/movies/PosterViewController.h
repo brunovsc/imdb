@@ -13,6 +13,6 @@
 @property (strong, nonatomic) UIImage *poster;
 @property IBOutlet UIImageView *moviePosterImageView;
 @property IBOutlet UIButton *returnButton;
-
+@property (strong, nonatomic) MovieRealm *movie;
 
 @end

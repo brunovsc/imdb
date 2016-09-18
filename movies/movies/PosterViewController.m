@@ -26,7 +26,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ReturnToDetails"]){
+        DetailsViewController *detailsVC = segue.destinationViewController;
+        detailsVC.movie = _movie;
+        detailsVC.poster = _poster;
+    }
+}
 
 /*
 #pragma mark - Navigation

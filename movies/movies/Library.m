@@ -23,7 +23,7 @@ static NSString *const kBaseURL = @"https://www.omdbapi.com/";
     return [self GET:requestUrl parameters:parameters
              success:^(NSURLSessionDataTask *task, id responseObject) {
                  
-                 NSLog(@"RequestURL: %@", task.currentRequest.URL);
+                 //NSLog(@"RequestURL: %@", task.currentRequest.URL);
                  
                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                  
