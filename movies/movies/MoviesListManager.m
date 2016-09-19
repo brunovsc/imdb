@@ -49,12 +49,14 @@
     return _searchHelper;
 }
 
+// Verifies if the movie is in the library
 - (MovieRealm *)movieInLibrary:(NSString *)movieTitle{
     MovieRealm *m;
     m = [_searchHelper objectForKey:[[movieTitle lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""]];
     return m;
 }
 
+// Adds a new movie to the library
 - (void)addNewMovie:(MovieRealm*)movie{
     MovieRealm *m;
     m = [_searchHelper objectForKey:movie.key];
@@ -88,17 +90,20 @@
     }
 
 }
+
+// Adds the pair UIImage - key in the dictionary
 - (void)addImage:(UIImage*)image forKey:(NSString*)key{
     [_movieImages setObject:image forKey:key];
 }
 
+// Removes the movie from the library
 - (void)removeMovie:(NSString *)movieTitle{
     RLMRealm *realm = [RLMRealm defaultRealm];
     MovieRealm *m;
     NSString *keyString = [[movieTitle lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
     m = [_searchHelper objectForKey:keyString];
     if(m){
-        
+        // Delete the image in the local storage
         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
         
@@ -106,19 +111,24 @@
         
         [[NSFileManager defaultManager] removeItemAtPath:[basePath stringByAppendingPathComponent:keyPNG] error:nil];
 
+        // Remove the movie from the local database
         [realm beginWriteTransaction];
         [realm deleteObject:m];
         [realm commitWriteTransaction];
+        
+        // Remove the references to the removed movie
         [_moviesList removeObject:m];
         [_searchHelper removeObjectForKey:keyString];
         
     }
 }
 
+// Returns an image for the given key
 - (UIImage*)imageForKey:(NSString*)key{
     return [_movieImages objectForKey:key];
 }
 
+// Saves all movies to the local database
 - (void)saveAllData{
     RLMRealm *realm = [RLMRealm defaultRealm];
     
@@ -139,12 +149,13 @@
     NSLog(@"movie list commited");
 }
 
-
+// Loads all movies from the local database
 - (void)loadData{
     RLMRealm *realm = [RLMRealm defaultRealm];
     
     RLMResults<MovieRealm *> *moviesLoaded = [MovieRealm allObjects];
     
+    // Directory to load local images (posters)
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
     
@@ -156,20 +167,22 @@
         [_moviesList addObject:rMovie];
         [_searchHelper setObject:rMovie forKey:rMovie.key];
         
+        // Load the image of the movie
         NSString * keyPNG = [NSString stringWithFormat:@"%@.png",rMovie.key];
         UIImage *poster = [UIImage imageWithContentsOfFile:[basePath stringByAppendingPathComponent:keyPNG]];
         [self addImage:poster forKey:rMovie.key];
         
-        NSLog(@"%@ found in database", rMovie.title);
+        //NSLog(@"%@ found in database", rMovie.title);
     }
     self.needSort = YES;
     
     [realm commitWriteTransaction];
     
-    NSLog(@"Finished loading database");
+    //NSLog(@"Finished loading database");
 
 }
 
+// Returns a list of movies whose key contains the given string
 - (NSMutableArray*)searchMoviesWithKey:(NSString*)text{
     NSString *key = [[text lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
@@ -184,6 +197,5 @@
     return results;
     
 }
-
 
 @end

@@ -357,6 +357,7 @@
 				TargetAttributes = {
 					AB82A8D21D860B3F00A5180D = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = EGMLXQ53NH;
 					};
 					AB82A8EB1D860B3F00A5180D = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -697,6 +698,7 @@
 			baseConfigurationReference = 773FA1D6E006F8845C042EA1 /* Pods-movies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = movies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = brunovsc.movies;
@@ -709,6 +711,7 @@
 			baseConfigurationReference = F955991F69F9144BECB6CACF /* Pods-movies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = movies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = brunovsc.movies;

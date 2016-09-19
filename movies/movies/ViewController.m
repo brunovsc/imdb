@@ -78,7 +78,7 @@
     }
     else {
         [self showErrorMessage:@"Empty string"];
-        [self restartSearchText];
+        //[self restartSearchText];
     }
 
 }
@@ -113,7 +113,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]){
+    //if(![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]){
         
         if(![_movieNameTextField.text isEqualToString:@""]){
             if([_searchResultArray count] > 0)
@@ -123,19 +123,16 @@
         }
         else
             return [_movies count];
-    }
-    else return [_movies count];
-}
-
-- (IBAction)restartSearchText{
-    [_movieNameTextField setText:@"Search Movie or Serie"];
+    //}
+    //else return [_movies count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if([_searchResultArray count] > 0)
         [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_searchResultArray objectAtIndex:indexPath.row]];
     else
-        if(([_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]) || ([_movieNameTextField.text isEqualToString:@""]))
+        //if(([_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]) || ([_movieNameTextField.text isEqualToString:@""]))
+        if([_movieNameTextField.text isEqualToString:@""])
             [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:[_movies objectAtIndex:indexPath.row]];
         else
             [self searchPressed:indexPath];
@@ -143,7 +140,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if( ([_movieNameTextField.text length] > 0) && ([_searchResultArray count] == 0) && (![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]) ){
+    if( ([_movieNameTextField.text length] > 0) && ([_searchResultArray count] == 0)){// && (![_movieNameTextField.text isEqualToString:@"Search Movie or Serie"]) ){
         MovieListSearchEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListSearchEmptyTableViewCell"];
         return cell;
     }
@@ -200,11 +197,6 @@
 
 - (IBAction)touchCancelSearch:(id)sender{
     [_searchResultArray removeAllObjects];
-    _isEditing = NO;
-}
-
-- (IBAction)isEditing:(id)sender{
-    _isEditing = YES;
 }
 
 @end
