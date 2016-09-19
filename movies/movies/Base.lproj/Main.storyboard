@@ -227,6 +227,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <action selector="searchPressed:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="Atz-Oi-1dC"/>
                                     <action selector="touchCancelSearch:" destination="BYZ-38-t0r" eventType="touchCancel" id="fiZ-5x-Y8V"/>
                                     <action selector="typingSearch:" destination="BYZ-38-t0r" eventType="editingChanged" id="QIF-Sl-sZT"/>
                                 </connections>

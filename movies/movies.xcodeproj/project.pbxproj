@@ -63,7 +63,7 @@
 		AB31E5C01D88434800689BD0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		AB6982B01D8F193F00E4AB47 /* PosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosterViewController.h; sourceTree = "<group>"; };
 		AB6982B11D8F193F00E4AB47 /* PosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PosterViewController.m; sourceTree = "<group>"; };
-		AB82A8D31D860B3F00A5180D /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB82A8D31D860B3F00A5180D /* OMDb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OMDb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB82A8D71D860B3F00A5180D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB82A8D91D860B3F00A5180D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AB82A8DA1D860B3F00A5180D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		AB82A8D41D860B3F00A5180D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB82A8D31D860B3F00A5180D /* movies.app */,
+				AB82A8D31D860B3F00A5180D /* OMDb.app */,
 				AB82A8EC1D860B3F00A5180D /* moviesTests.xctest */,
 				AB82A8F71D860B3F00A5180D /* moviesUITests.xctest */,
 			);
@@ -302,7 +302,7 @@
 			);
 			name = movies;
 			productName = movies;
-			productReference = AB82A8D31D860B3F00A5180D /* movies.app */;
+			productReference = AB82A8D31D860B3F00A5180D /* OMDb.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AB82A8EB1D860B3F00A5180D /* moviesTests */ = {
@@ -701,7 +701,7 @@
 				INFOPLIST_FILE = movies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = brunovsc.movies;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OMDb;
 			};
 			name = Debug;
 		};
@@ -714,7 +714,7 @@
 				INFOPLIST_FILE = movies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = brunovsc.movies;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OMDb;
 			};
 			name = Release;
 		};
